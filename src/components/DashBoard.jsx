@@ -46,6 +46,7 @@ function DashBoard() {
     }
         const handlelogout = async () => {
              if (!currentUserId) {
+                 setlog('LogIn')
             alert("You are not logged in");
            window.location.href = '/signin';
         }
@@ -53,6 +54,7 @@ function DashBoard() {
             window.location.href = '/signin'; }
             
         // setlog("Logging out...")
+            else
         
         try {
             const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/logout', {
@@ -71,7 +73,7 @@ function DashBoard() {
             // window.location.href = '/signin'; 
         }
         catch(err){console.error('Error logging out:', err);
-            return;
+            return ;
 
         }}
     const currentUserId = localStorage.getItem('userId'); // Assuming you store the current user's ID in localStorage
