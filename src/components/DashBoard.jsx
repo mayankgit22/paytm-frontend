@@ -59,7 +59,7 @@ function DashBoard() {
         // setlog("Logging out...")
         
         try {
-            const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/logout', {
+            const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/logout', {
                 method: 'POST',
                 credentials: 'include', // Include cookies in the request
             });
