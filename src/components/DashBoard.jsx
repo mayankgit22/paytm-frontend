@@ -62,11 +62,11 @@ function DashBoard() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+                setShowPopup(false);
             localStorage.removeItem('userId');
             setTimeout(() => {
-                setShowPopup(false);
                 setlog("Login");
-            }, 2000);
+            }, 1000);
             // setlog("Login") 
             // window.location.href = '/signin'; 
         }
