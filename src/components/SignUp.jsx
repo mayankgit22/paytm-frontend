@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
                     withCredentials: true // This is important to include cookies in the request
                 }).then(res => {
                     console.log("Sign up successful:", res.data);
-                    alert("Sign up successful! Please log in.");
+                    // alert("Sign up successful! Please log in.");
                     localStorage.setItem('userId', res.data.user.id); // Store user ID in localStorage
                     navigate('/Dashboard');
                 }).catch(error => {
