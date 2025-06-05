@@ -81,7 +81,7 @@ function DashBoard() {
 
         <h1 className="text-4xl font-bold mt-2">Transfer Money to Your Friends</h1>
     <p className="text-lg mt-2">Your current balance is: <span className="font-semibold">{balance}</span></p>
-    <button className="bg-red-500 text-black font-lg rounded-lg font-semibold p-2 font-xl" onClick={handlelogout}>{log}</button>
+    <button className="bg-red-500 text-black font-lg rounded-lg font-semibold p-2 font-xl cursor-pointer" onClick={handlelogout}>{log}</button>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
         {users.map(user => (
             user._id !== currentUserId ? (
