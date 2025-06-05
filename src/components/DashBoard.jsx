@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 
 function DashBoard() {
     const [users, setUsers] = useState([]);
+        const [log,setlog]=useState("Logout");
     const [loading, setLoading] = useState(true);
        const [balance, setBalance] = useState("₹0.00");
     useEffect(() => {
@@ -43,12 +44,39 @@ function DashBoard() {
     if (loading) {
         return <div className="text-center mt-10">Loading...</div>;
     }
+        const handlelogout = async () => {
+        if(log==="Login"){
+            window.location.href = '/signin'; }
+            else
+        setlog("Logging out...")
+        
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/user/logout', {
+                method: 'POST',
+                credentials: 'include', // Include cookies in the request
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            localStorage.removeItem('userId');
+            setTimeout(() => {
+                setlog("Login");
+            }, 4000);
+            // setlog("Login") 
+            // window.location.href = '/signin'; 
+        }
+        catch(err){console.error('Error logging out:', err);
+            return;
+
+        }}
     const currentUserId = localStorage.getItem('userId'); // Assuming you store the current user's ID in localStorage
     console.log("Current User ID:", currentUserId);
   return (<>
 
         <h1 className="text-4xl font-bold mt-2">Transfer Money to Your Friends</h1>
     <p className="text-lg mt-2">Your current balance is: <span className="font-semibold">{balance}</span></p>
+          <button className="bg-red-500 text-black font-lg rounded-lg font-semibold p-2 font-xl" onClick={handlelogout}>{log}</button>
+
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
         {users.map(user => (
             user._id !== currentUserId ? (
