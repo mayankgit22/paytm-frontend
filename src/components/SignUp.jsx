@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
         const navigate = useNavigate();
         const handleSubmit = async () => {
             try{
-                const response = await axios.post('https://paytm-backend-1-6y9o.onrender.com/api/v1/user/signup', {
+                const response = await axios.post('https://paytm-backend-1-6y9o.onrender.com/user/signup', {
                     name,
                     email,
                     password
