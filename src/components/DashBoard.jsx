@@ -7,7 +7,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchBalance = async () => {
             try {
-                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/api/v1/user/account/balance', {
+                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/account/balance', {
                     credentials: 'include' // Include cookies in the request
                 });
                 if (!response.ok) {
@@ -24,7 +24,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/api/v1/users', {
+                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/users', {
                     credentials: 'include' // Include cookies in the request
                 });
                 if (!response.ok) {
@@ -72,7 +72,7 @@ function Card({ Name, picUrl,id }) {
         else {
             try {
                 const to=id;
-                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/api/v1/user/account/transfer', {
+                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/account/transfer', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
