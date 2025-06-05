@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 
 function DashBoard() {
     const [users, setUsers] = useState([]);
-        const [log,setlog]=useState("");
+        const [log,setlog]=useState(log);
     const [loading, setLoading] = useState(true);
        const [balance, setBalance] = useState("₹0.00");
     useEffect(() => {
