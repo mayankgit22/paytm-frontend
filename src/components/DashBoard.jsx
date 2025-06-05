@@ -105,7 +105,7 @@ function Card({ Name, picUrl,id }) {
         else {
             try {
                 const to=id;
-                const response = await fetch('http://localhost:3000/api/v1/user/account/transfer', {
+                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/account/transfer', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
