@@ -1,10 +1,12 @@
+https://paytm-backend-1-6y9o.onrender.com
 import { useEffect,useState } from "react";
 
 function DashBoard() {
+    const [log,setlog]=useState("Logout");
     const [users, setUsers] = useState([]);
-        const [log,setlog]=useState("");
     const [loading, setLoading] = useState(true);
        const [balance, setBalance] = useState("₹0.00");
+       
     useEffect(() => {
         const fetchBalance = async () => {
             try {
@@ -44,27 +46,26 @@ function DashBoard() {
     if (loading) {
         return <div className="text-center mt-10">Loading...</div>;
     }
-        const handlelogout = async () => {
-             if (!currentUserId) {
-                 setlog('LogIn')
+    const currentUserId = localStorage.getItem('userId'); // Assuming you store the current user's ID in localStorage
+    console.log("Current User ID:", currentUserId);
+    const handlelogout = async () => {
+        if (!currentUserId) {
             alert("You are not logged in");
            window.location.href = '/signin';
         }
         if(log==="Login"){
             window.location.href = '/signin'; }
-            
-        // setlog("Logging out...")
             else
+        // setlog("Logging out...")
         
         try {
-            const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/logout', {
+            const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/logout', {
                 method: 'POST',
                 credentials: 'include', // Include cookies in the request
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-                // setShowPopup(false);
             localStorage.removeItem('userId');
             setTimeout(() => {
                 setlog("Login");
@@ -73,17 +74,14 @@ function DashBoard() {
             // window.location.href = '/signin'; 
         }
         catch(err){console.error('Error logging out:', err);
-            return ;
+            return;
 
         }}
-    const currentUserId = localStorage.getItem('userId'); // Assuming you store the current user's ID in localStorage
-    console.log("Current User ID:", currentUserId);
   return (<>
 
         <h1 className="text-4xl font-bold mt-2">Transfer Money to Your Friends</h1>
     <p className="text-lg mt-2">Your current balance is: <span className="font-semibold">{balance}</span></p>
-          <button className="bg-red-500 text-black font-lg rounded-lg font-semibold p-2 font-xl cursor-pointer" onClick={handlelogout}>{log}</button>
-
+    <button className="bg-red-500 text-black font-lg rounded-lg font-semibold p-2 font-xl" onClick={handlelogout}>{log}</button>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
         {users.map(user => (
             user._id !== currentUserId ? (
@@ -107,7 +105,7 @@ function Card({ Name, picUrl,id }) {
         else {
             try {
                 const to=id;
-                const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/account/transfer', {
+                const response = await fetch('http://localhost:3000/api/v1/user/account/transfer', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,19 +114,18 @@ function Card({ Name, picUrl,id }) {
                     body: JSON.stringify({ to, amount }),
                 });
                 if (!response.ok) {
-                     setShowPopup(false);
+                    alert('transfer failed please log in or try again')
                     throw new Error('Network response was not ok');
                 }
                 else{
-                    // alert(`You sent $${amount} to ${Name}`);
                     setShowPopup(true);
                     
-                    setTimeout(() => setShowPopup(false), 5000);
+                    // setTimeout(() => setShowPopup(false), 5000);
                 }
                 setTimeout(() => {
                     // setShowPopup(false);
                     setAmount(""); 
-                }, 5000);
+                }, 1000);
                 // const data = await response.json();
                 // console.log(data);
             }
@@ -158,12 +155,10 @@ function Card({ Name, picUrl,id }) {
         <button  onClick={handleSend} className="bg-blue-500 text-white rounded-md p-2 w-1/2 cursor-pointer">Send</button>
       </div>
     </div>
- {showPopup && (
-  <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
-    ✅ ₹{amount} sent successfully! to {Name}
-  </div>
-
-
+   {showPopup && (
+        <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
+          ✅ ₹{amount} sent successfully! to {Name}
+        </div>
       )}
     </>
   );
@@ -171,3 +166,4 @@ function Card({ Name, picUrl,id }) {
 
 
 export default DashBoard
+
