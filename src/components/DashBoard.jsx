@@ -62,7 +62,7 @@ function DashBoard() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-                setShowPopup(false);
+                // setShowPopup(false);
             localStorage.removeItem('userId');
             setTimeout(() => {
                 setlog("Login");
@@ -114,6 +114,7 @@ function Card({ Name, picUrl,id }) {
                     body: JSON.stringify({ to, amount }),
                 });
                 if (!response.ok) {
+                     setShowPopup(false);
                     throw new Error('Network response was not ok');
                 }
                 else{
