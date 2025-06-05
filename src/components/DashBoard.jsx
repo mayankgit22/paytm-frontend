@@ -64,8 +64,9 @@ function DashBoard() {
             }
             localStorage.removeItem('userId');
             setTimeout(() => {
+                setShowPopup(false);
                 setlog("Login");
-            }, 4000);
+            }, 2000);
             // setlog("Login") 
             // window.location.href = '/signin'; 
         }
@@ -154,7 +155,7 @@ function Card({ Name, picUrl,id }) {
         <button  onClick={handleSend} className="bg-blue-500 text-white rounded-md p-2 w-1/2 cursor-pointer">Send</button>
       </div>
     </div>
- {showPopup && log === "logout" && (
+ {showPopup && (
   <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
     ✅ ₹{amount} sent successfully! to {Name}
   </div>
