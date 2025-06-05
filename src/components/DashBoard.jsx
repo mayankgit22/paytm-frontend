@@ -51,7 +51,7 @@ function DashBoard() {
         setlog("Logging out...")
         
         try {
-            const response = await fetch('http://localhost:3000/api/v1/user/logout', {
+            const response = await fetch('https://paytm-backend-1-6y9o.onrender.com/user/logout', {
                 method: 'POST',
                 credentials: 'include', // Include cookies in the request
             });
